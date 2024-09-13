@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> <!-- Font Awesome -->
+    <title>Edit Task</title>
+</head>
+<body class="container mt-5">
+    <h1 class="mb-4">Edit Task</h1>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="alert-container">
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+
+    <!-- Edit Task Form -->
+    <form action="{{ url_for('edit', task_id=task.id) }}" method="post" class="form-inline mb-3">
+        <input type="text" name="task" class="form-control mr-2" value="{{ task.name }}" required>
+        <button type="submit" class="btn btn-success">Update Task</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary ml-2">Cancel</a>
+    </form>
+</body>
+</html>
